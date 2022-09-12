@@ -38,7 +38,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             docker image pull josesegurapersistent/propeller-service
-            docker container stop propeller-service-prod
+            docker container stop propeller-prod
             docker container prune -f
-            docker run -d --name propeller-service-prod --restart unless-stopped -p 5001:80 -p 5016:443 josesegurapersistent/propeller-service
+            docker run -d --network=introspect-net --name propeller-prod --restart unless-stopped -p 7002:7002 josesegurapersistent/propeller-service
             docker image prune -f
